@@ -1,0 +1,7 @@
+{
+  "name": "Ok! Note",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
