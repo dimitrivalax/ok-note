@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title data-testid="settings-title">{{ 'settings.title' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>{{ 'settings.darkMode' | translate }}</h2>
+        <p>{{ 'settings.darkModeHint' | translate }}</p>
+      </ion-label>
+      <ion-toggle
+        data-testid="theme-toggle"
+        slot="end"
+        [checked]="themeService.isDark()"
+        (ionChange)="onThemeToggle($event)"
+      ></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>{{ 'settings.language' | translate }}</h2>
+        <p>{{ 'settings.languageHint' | translate }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-segment
+        data-testid="language-select"
+        [value]="i18nService.locale()"
+        (ionChange)="onLocaleChange($event)"
+      >
+        <ion-segment-button value="en" data-testid="language-en">
+          <ion-label>{{ 'settings.langEn' | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="fr" data-testid="language-fr">
+          <ion-label>{{ 'settings.langFr' | translate }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+  </ion-list>
+</ion-content>

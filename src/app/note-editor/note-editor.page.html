@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/notes" [text]="'editor.back' | translate"></ion-back-button>
+    </ion-buttons>
+    <ion-title data-testid="editor-title">
+      {{ (isNew() ? 'editor.newTitle' : 'editor.editTitle') | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button data-testid="save-note" (click)="save()">{{ 'editor.save' | translate }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input
+        data-testid="note-title-input"
+        [label]="'editor.titleLabel' | translate"
+        labelPlacement="stacked"
+        [placeholder]="'editor.titlePlaceholder' | translate"
+        [value]="title()"
+        (ionInput)="title.set($any($event.target).value ?? '')"
+      ></ion-input>
+    </ion-item>
+
+    @if (noteType() === 'text') {
+      <ion-item>
+        <ion-textarea
+          data-testid="note-content-input"
+          [label]="'editor.contentLabel' | translate"
+          labelPlacement="stacked"
+          [placeholder]="'editor.contentPlaceholder' | translate"
+          autoGrow="true"
+          rows="8"
+          [value]="content()"
+          (ionInput)="content.set($any($event.target).value ?? '')"
+        ></ion-textarea>
+      </ion-item>
+    } @else {
+      <ion-reorder-group data-testid="checklist-reorder" [disabled]="false" (ionItemReorder)="handleReorder($event)">
+        @for (item of items(); track item.id) {
+          <ion-item-sliding>
+            <ion-item [attr.data-testid]="'checklist-item-' + item.id">
+              <ion-checkbox
+                slot="start"
+                [checked]="item.checked"
+                (ionChange)="toggleItemChecked(item.id, $any($event.detail).checked)"
+                [attr.data-testid]="'checklist-check-' + item.id"
+              ></ion-checkbox>
+              <ion-input
+                [value]="item.text"
+                [placeholder]="'editor.checklistItemPlaceholder' | translate"
+                (ionInput)="updateItemText(item.id, $any($event.target).value)"
+                [attr.data-testid]="'checklist-text-' + item.id"
+              ></ion-input>
+              <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="removeItem(item.id)">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        }
+      </ion-reorder-group>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        class="ion-margin-top"
+        data-testid="add-checklist-item"
+        (click)="addItem()"
+      >
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        {{ 'editor.addItem' | translate }}
+      </ion-button>
+    }
+
+    <ion-item>
+      <ion-label>
+        <h3>{{ 'editor.reminder' | translate }}</h3>
+        @if (reminderAt()) {
+          <p data-testid="reminder-value">{{ reminderAt() | date: 'short': undefined: i18nService.angularLocale() }}</p>
+        } @else {
+          <p data-testid="reminder-value">{{ 'editor.reminderNone' | translate }}</p>
+        }
+      </ion-label>
+      <ion-datetime-button datetime="reminder-datetime" data-testid="reminder-picker"></ion-datetime-button>
+    </ion-item>
+
+    @if (reminderAt()) {
+      <ion-button expand="block" fill="clear" color="medium" data-testid="clear-reminder" (click)="clearReminder()">
+        {{ 'editor.clearReminder' | translate }}
+      </ion-button>
+    }
+
+    @if (!isNew()) {
+      <ion-item lines="none">
+        <ion-note>
+          {{ 'editor.createdAt' | translate }} {{ createdAt() | date: 'short': undefined: i18nService.angularLocale() }}
+          · {{ 'editor.updatedAt' | translate }} {{ updatedAt() | date: 'short': undefined: i18nService.angularLocale() }}
+        </ion-note>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        color="danger"
+        fill="outline"
+        class="ion-margin-top"
+        data-testid="delete-note"
+        (click)="deleteCurrent()"
+      >
+        {{ 'editor.delete' | translate }}
+      </ion-button>
+    }
+  </ion-list>
+</ion-content>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime
+      id="reminder-datetime"
+      data-testid="reminder-datetime"
+      presentation="date-time"
+      [locale]="i18nService.angularLocale()"
+      [value]="reminderAt() || undefined"
+      (ionChange)="reminderAt.set($any($event.detail).value ?? '')"
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>

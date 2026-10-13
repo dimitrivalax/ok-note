@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary" class="notes-header-toolbar">
+    <ion-title slot="start" data-testid="notes-title">OK! Note</ion-title>
+    <ion-searchbar
+      slot="end"
+      data-testid="notes-search"
+      class="notes-searchbar"
+      [placeholder]="'notes.searchPlaceholder' | translate"
+      debounce="250"
+      [value]="searchQuery()"
+      (ionInput)="onSearch($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (notes().length === 0) {
+    <div class="empty-state" data-testid="notes-empty">
+      <p>{{ 'notes.emptyTitle' | translate }}</p>
+      <p>{{ 'notes.emptyHint' | translate }}</p>
+    </div>
+  } @else {
+    <ion-list data-testid="notes-list">
+      @for (note of notes(); track note.id) {
+        <ion-item-sliding>
+          <ion-item button detail (click)="openNote(note)" [attr.data-testid]="'note-item-' + note.id">
+            <ion-icon
+              slot="start"
+              [name]="note.type === 'checklist' ? 'checkbox-outline' : 'document-text-outline'"
+              color="primary"
+            ></ion-icon>
+            <ion-label>
+              @if (note.title) {
+                <h2>{{ note.title }}</h2>
+              }
+              <p>{{ getPreview(note) }}</p>
+              <p>
+                <ion-note>{{ note.updatedAt | date: 'short': undefined: i18nService.angularLocale() }}</ion-note>
+                @if (note.reminderAt) {
+                  <ion-icon name="alarm-outline" color="tertiary" class="reminder-icon"></ion-icon>
+                }
+              </p>
+            </ion-label>
+            <ion-badge slot="end" [color]="note.type === 'checklist' ? 'tertiary' : 'medium'">
+              {{ (note.type === 'checklist' ? 'notes.badgeChecklist' : 'notes.badgeText') | translate }}
+            </ion-badge>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="deleteNote(note)" data-testid="note-delete">
+              {{ 'notes.delete' | translate }}
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      }
+    </ion-list>
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button data-testid="create-note-fab" (click)="presentCreateSheet()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

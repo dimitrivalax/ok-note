@@ -1,0 +1,74 @@
+.notes-header-toolbar {
+  --min-height: 56px;
+  --padding-start: 0.5rem;
+  --padding-end: 0.5rem;
+
+  ion-title {
+    flex: 0 1 auto;
+    max-width: min(42%, 12rem);
+    padding-inline-end: 0.5rem;
+  }
+}
+
+.notes-searchbar {
+  flex: 1 1 auto;
+  max-width: 28rem;
+  min-width: 9rem;
+  padding-block: 0.35rem;
+  padding-inline: 0;
+  --background: color-mix(in srgb, white 26%, var(--ion-color-primary));
+  --border-radius: 999px;
+  --box-shadow: none;
+  --height: 2.25rem;
+  --placeholder-color: rgba(var(--ion-color-primary-contrast-rgb), 0.55);
+  --placeholder-opacity: 1;
+  --icon-color: rgba(var(--ion-color-primary-contrast-rgb), 0.55);
+  --clear-button-color: rgba(var(--ion-color-primary-contrast-rgb), 0.55);
+
+  // Ionic searchbar uses scoped CSS (light DOM), so these reach the icon.
+  ::ng-deep .searchbar-search-icon {
+    inset-inline-start: auto;
+    inset-inline-end: 0.85rem;
+  }
+
+  ::ng-deep .searchbar-input {
+    padding-inline-start: 1rem;
+    padding-inline-end: 2.75rem;
+  }
+
+  &.searchbar-has-value.searchbar-should-show-clear ::ng-deep .searchbar-search-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-header-toolbar ion-title {
+    max-width: 7.5rem;
+    font-size: 1.05rem;
+  }
+
+  .notes-searchbar {
+    max-width: none;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50%;
+  padding: 2rem;
+  text-align: center;
+  color: var(--ion-color-medium);
+}
+
+.reminder-icon {
+  margin-left: 0.35rem;
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+ion-item h2 {
+  font-weight: 600;
+}

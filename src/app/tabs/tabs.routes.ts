@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
@@ -7,30 +8,33 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadComponent: () =>
-          import('../tab1/tab1.page').then((m) => m.Tab1Page),
+        path: 'notes',
+        loadComponent: () => import('../notes/notes.page').then((m) => m.NotesPage),
       },
       {
-        path: 'tab2',
+        path: 'notes/new',
         loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../note-editor/note-editor.page').then((m) => m.NoteEditorPage),
       },
       {
-        path: 'tab3',
+        path: 'notes/:id',
         loadComponent: () =>
-          import('../tab3/tab3.page').then((m) => m.Tab3Page),
+          import('../note-editor/note-editor.page').then((m) => m.NoteEditorPage),
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('../settings/settings.page').then((m) => m.SettingsPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/notes',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/notes',
     pathMatch: 'full',
   },
 ];
