@@ -3,7 +3,7 @@ import Dexie, { type Table } from 'dexie';
 import type { Note } from '../models/note.schema';
 
 /**
- * IndexedDB database for OK! Note persistence.
+ * IndexedDB database for Ok! Note persistence.
  */
 export class NoteDatabase extends Dexie {
   /**

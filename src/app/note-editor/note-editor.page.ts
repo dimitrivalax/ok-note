@@ -161,7 +161,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
     if (!note) {
       this.isHydrating = false;
       await this.alertService.toast(this.i18nService.t('editor.notFoundToast'), 'danger');
-      await this.router.navigate(['/tabs/notes']);
+      await this.router.navigate(['/notes']);
       return;
     }
 
@@ -331,7 +331,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
     await this.noteService.delete(this.noteId);
     this.noteId = null;
     await this.alertService.toast(this.i18nService.t('editor.deletedToast'), 'success');
-    await this.router.navigate(['/tabs/notes']);
+    await this.router.navigate(['/notes']);
   }
 
   private addItemAfter(afterId: string): string {
@@ -422,7 +422,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
         this.isNew.set(false);
         this.createdAt.set(created.createdAt);
         this.updatedAt.set(created.updatedAt);
-        this.location.replaceState(`/tabs/notes/${created.id}`);
+        this.location.replaceState(`/notes/${created.id}`);
         return;
       }
 

@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
- * Playwright configuration for OK! Note E2E tests.
+ * Playwright configuration for Ok! Note E2E tests.
  */
 export default defineConfig({
   testDir: './e2e',

@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-ADRs capture significant technical decisions for OK! Note.
+ADRs capture significant technical decisions for Ok! Note.
 
 ## Index
 

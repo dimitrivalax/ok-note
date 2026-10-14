@@ -55,7 +55,7 @@ export class NotificationService {
     await LocalNotifications.addListener('localNotificationActionPerformed', (event) => {
       const noteId = event.notification.extra?.['noteId'] as string | undefined;
       if (noteId) {
-        void this.router.navigate(['/tabs/notes', noteId]);
+        void this.router.navigate(['/notes', noteId]);
       }
     });
 

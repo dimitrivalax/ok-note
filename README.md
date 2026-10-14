@@ -1,4 +1,4 @@
-# OK! Note
+# Ok! Note
 
 Local-first notes and checklists for web and Android. Create text notes or checklists, search them, set reminders, and switch language (EN/FR) or theme (light/dark)—all data stays on the device.
 

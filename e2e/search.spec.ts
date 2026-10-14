@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Note search', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/tabs/notes');
+    await page.goto('/notes');
     await page.evaluate(() => indexedDB.deleteDatabase('ok-note'));
     await page.reload();
   });

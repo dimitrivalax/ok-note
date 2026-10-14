@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in OK! Note. This guide covers the essentials for local development and pull requests.
+Thanks for your interest in Ok! Note. This guide covers the essentials for local development and pull requests.
 
 ## Development setup
 

@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary" class="notes-header-toolbar">
-    <ion-title slot="start" data-testid="notes-title">OK! Note</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button data-testid="menu-button"></ion-menu-button>
+    </ion-buttons>
     <ion-searchbar
-      slot="end"
       data-testid="notes-search"
       class="notes-searchbar"
       [placeholder]="'notes.searchPlaceholder' | translate"

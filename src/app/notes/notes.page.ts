@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {
   ActionSheetController,
   IonBadge,
+  IonButtons,
   IonContent,
   IonFab,
   IonFabButton,
@@ -15,9 +16,9 @@ import {
   IonItemSliding,
   IonLabel,
   IonList,
+  IonMenuButton,
   IonNote,
   IonSearchbar,
-  IonTitle,
   IonToolbar,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
@@ -26,6 +27,7 @@ import {
   alarmOutline,
   checkboxOutline,
   documentTextOutline,
+  menuOutline,
 } from 'ionicons/icons';
 
 import type { Note } from '../models/note.schema';
@@ -46,7 +48,8 @@ import { NoteService } from '../services/note.service';
     TranslatePipe,
     IonHeader,
     IonToolbar,
-    IonTitle,
+    IonButtons,
+    IonMenuButton,
     IonContent,
     IonSearchbar,
     IonList,
@@ -84,7 +87,13 @@ export class NotesPage implements OnInit {
   readonly searchQuery = signal('');
 
   constructor() {
-    addIcons({ addOutline, alarmOutline, checkboxOutline, documentTextOutline });
+    addIcons({
+      addOutline,
+      alarmOutline,
+      checkboxOutline,
+      documentTextOutline,
+      menuOutline,
+    });
   }
 
   /**
@@ -114,7 +123,7 @@ export class NotesPage implements OnInit {
    * Opens the note editor for an existing note.
    */
   openNote(note: Note): void {
-    void this.router.navigate(['/tabs/notes', note.id]);
+    void this.router.navigate(['/notes', note.id]);
   }
 
   /**
@@ -128,14 +137,14 @@ export class NotesPage implements OnInit {
           text: this.i18nService.t('notes.createText'),
           data: 'text',
           handler: () => {
-            void this.router.navigate(['/tabs/notes/new'], { queryParams: { type: 'text' } });
+            void this.router.navigate(['/notes/new'], { queryParams: { type: 'text' } });
           },
         },
         {
           text: this.i18nService.t('notes.createChecklist'),
           data: 'checklist',
           handler: () => {
-            void this.router.navigate(['/tabs/notes/new'], {
+            void this.router.navigate(['/notes/new'], {
               queryParams: { type: 'checklist' },
             });
           },

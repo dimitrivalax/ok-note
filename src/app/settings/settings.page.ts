@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {
+  IonBackButton,
+  IonButtons,
   IonContent,
   IonHeader,
   IonItem,
@@ -27,6 +29,8 @@ import { ThemeService } from '../services/theme.service';
   imports: [
     IonHeader,
     IonToolbar,
+    IonButtons,
+    IonBackButton,
     IonTitle,
     IonContent,
     IonList,

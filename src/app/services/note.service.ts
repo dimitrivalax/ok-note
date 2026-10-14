@@ -152,7 +152,7 @@ export class NoteService {
       return { ...note, reminderAt: null, notificationId: null };
     }
 
-    const title = note.title?.trim() || 'OK! Note';
+    const title = note.title?.trim() || 'Ok! Note';
     const body =
       note.type === 'text'
         ? note.content.slice(0, 120)

@@ -2,10 +2,11 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Text notes CRUD', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/tabs/notes');
+    await page.goto('/notes');
     await page.evaluate(() => indexedDB.deleteDatabase('ok-note'));
     await page.reload();
-    await expect(page.getByTestId('notes-title')).toBeVisible();
+    await expect(page.getByTestId('menu-button')).toBeVisible();
+    await expect(page.getByTestId('notes-search')).toBeVisible();
   });
 
   test('creates, edits, and deletes a text note', async ({ page }) => {

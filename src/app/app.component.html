@@ -1,3 +1,29 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title data-testid="menu-app-title">Ok! Note</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            detail="false"
+            routerLink="/settings"
+            routerDirection="root"
+            data-testid="menu-settings"
+          >
+            <ion-icon slot="start" name="settings-outline" aria-hidden="true"></ion-icon>
+            <ion-label>{{ 'tabs.settings' | translate }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
 </ion-app>

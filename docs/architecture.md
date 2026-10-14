@@ -1,6 +1,6 @@
 # Architecture
 
-OK! Note is a local-first Ionic Angular app. UI pages talk to injectable services; services own persistence and native plugins. There is no backend.
+Ok! Note is a local-first Ionic Angular app. UI pages talk to injectable services; services own persistence and native plugins. There is no backend.
 
 ## High-level flow
 
@@ -15,9 +15,9 @@ flowchart LR
 
 ## Routing
 
-- Shell: Ionic tabs (`src/app/tabs/`).
-- Notes list and settings as tab roots.
-- Note editor routes: `notes/new` and `notes/:id` (lazy-loaded standalone pages).
+- Shell: app-level `ion-menu` drawer + flat routes in `src/app/app.routes.ts`.
+- Notes list at `/notes`; settings at `/settings` (opened from the drawer).
+- Note editor routes: `/notes/new` and `/notes/:id` (lazy-loaded standalone pages).
 
 ## Services
 

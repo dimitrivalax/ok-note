@@ -14,7 +14,7 @@
     "e2e:ui": "playwright test --ui"
   },
   "private": true,
-  "description": "OK! Note — local-first notes and checklists for web and Android",
+  "description": "Ok! Note — local-first notes and checklists for web and Android",
   "dependencies": {
     "@angular/common": "22.1.7",
     "@angular/compiler": "22.1.7",

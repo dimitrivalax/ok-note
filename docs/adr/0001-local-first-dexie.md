@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-OK! Note must work offline on web and Android without a backend. Notes need structured queries (by id, type, timestamps) and durable client-side storage that works in the browser and the Capacitor WebView.
+Ok! Note must work offline on web and Android without a backend. Notes need structured queries (by id, type, timestamps) and durable client-side storage that works in the browser and the Capacitor WebView.
 
 ## Decision
 
