@@ -25,6 +25,11 @@
   }
 }
 
+.notes-fab {
+  // Clear the Android system navigation / gesture bar (safe-area is often 0 there).
+  margin-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
 .empty-state {
   display: flex;
   flex-direction: column;
