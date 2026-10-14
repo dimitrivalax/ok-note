@@ -23,13 +23,13 @@ Local-first notes and checklists for web and Android. Create text notes or check
 ## Prerequisites
 
 - Node.js 20+ (LTS recommended)
-- npm
+- pnpm (version pinned via `packageManager` in `package.json`)
 
 ## Setup
 
 ```bash
-npm install
-npm start
+pnpm install
+pnpm start
 ```
 
 Open the URL printed by the Angular CLI (typically `http://localhost:4200`).
@@ -38,21 +38,21 @@ Open the URL printed by the Angular CLI (typically `http://localhost:4200`).
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | Serve the app locally |
-| `npm run build` | Production build to `www/` |
-| `npm test` | Unit tests |
-| `npm run lint` | ESLint |
-| `npm run e2e` | Playwright end-to-end tests |
-| `npm run e2e:ui` | Playwright UI mode |
+| `pnpm start` | Serve the app locally |
+| `pnpm run build` | Production build to `www/` |
+| `pnpm test` | Unit tests |
+| `pnpm run lint` | ESLint |
+| `pnpm run e2e` | Playwright end-to-end tests |
+| `pnpm run e2e:ui` | Playwright UI mode |
 
 ### Android
 
 After a web build, sync and open the native project:
 
 ```bash
-npm run build
-npx cap sync android
-npx cap open android
+pnpm run build
+pnpm exec cap sync android
+pnpm exec cap open android
 ```
 
 App ID: `com.ok.note`.

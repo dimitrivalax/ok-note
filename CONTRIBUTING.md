@@ -4,14 +4,14 @@ Thanks for your interest in OK! Note. This guide covers the essentials for local
 
 ## Development setup
 
-1. Install dependencies: `npm install`
-2. Start the app: `npm start`
+1. Install dependencies: `pnpm install`
+2. Start the app: `pnpm start`
 3. Run checks before opening a PR:
-   - `npm run lint`
-   - `npm test`
-   - `npm run e2e` (when you change user-facing flows)
+   - `pnpm run lint`
+   - `pnpm test`
+   - `pnpm run e2e` (when you change user-facing flows)
 
-Use **npm** as the supported package manager (`package-lock.json`).
+Use **pnpm** as the supported package manager (`pnpm-lock.yaml`). The `packageManager` field in `package.json` pins the version.
 
 ## Pull requests
 
