@@ -6,9 +6,6 @@
     <ion-title data-testid="editor-title">
       {{ (isNew() ? 'editor.newTitle' : 'editor.editTitle') | translate }}
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button data-testid="save-note" (click)="save()">{{ 'editor.save' | translate }}</ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +18,7 @@
         labelPlacement="stacked"
         [placeholder]="'editor.titlePlaceholder' | translate"
         [value]="title()"
-        (ionInput)="title.set($any($event.target).value ?? '')"
+        (ionInput)="onTitleChange($any($event.target).value)"
       ></ion-input>
     </ion-item>
 
@@ -35,7 +32,7 @@
           autoGrow="true"
           rows="8"
           [value]="content()"
-          (ionInput)="content.set($any($event.target).value ?? '')"
+          (ionInput)="onContentChange($any($event.target).value)"
         ></ion-textarea>
       </ion-item>
     } @else {
@@ -53,6 +50,7 @@
                 [value]="item.text"
                 [placeholder]="'editor.checklistItemPlaceholder' | translate"
                 (ionInput)="updateItemText(item.id, $any($event.target).value)"
+                (keydown.enter)="onChecklistEnter(item.id, $event)"
                 [attr.data-testid]="'checklist-text-' + item.id"
               ></ion-input>
               <ion-reorder slot="end"></ion-reorder>
@@ -126,7 +124,7 @@
       presentation="date-time"
       [locale]="i18nService.angularLocale()"
       [value]="reminderAt() || undefined"
-      (ionChange)="reminderAt.set($any($event.detail).value ?? '')"
+      (ionChange)="onReminderChange($any($event.detail).value)"
     ></ion-datetime>
   </ng-template>
 </ion-modal>

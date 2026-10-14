@@ -184,6 +184,17 @@ export class NotesPage implements OnInit {
       .join(' · ');
   }
 
+  /**
+   * Returns true when every checklist item is checked.
+   */
+  isChecklistCompleted(note: Note): boolean {
+    return (
+      note.type === 'checklist' &&
+      note.items.length > 0 &&
+      note.items.every((item) => item.checked)
+    );
+  }
+
   private async reloadNotes(): Promise<void> {
     const notes = await this.noteService.search(this.searchQuery());
     this.notes.set(notes);

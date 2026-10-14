@@ -23,7 +23,13 @@
     <ion-list data-testid="notes-list">
       @for (note of notes(); track note.id) {
         <ion-item-sliding>
-          <ion-item button detail (click)="openNote(note)" [attr.data-testid]="'note-item-' + note.id">
+          <ion-item
+            button
+            detail
+            (click)="openNote(note)"
+            [attr.data-testid]="'note-item-' + note.id"
+            [class.note-completed]="isChecklistCompleted(note)"
+          >
             <ion-icon
               slot="start"
               [name]="note.type === 'checklist' ? 'checkbox-outline' : 'document-text-outline'"
@@ -33,7 +39,7 @@
               @if (note.title) {
                 <h2>{{ note.title }}</h2>
               }
-              <p>{{ getPreview(note) }}</p>
+              <p [class.note-completed-text]="isChecklistCompleted(note)">{{ getPreview(note) }}</p>
               <p>
                 <ion-note>{{ note.updatedAt | date: 'short': undefined: i18nService.angularLocale() }}</ion-note>
                 @if (note.reminderAt) {
@@ -41,9 +47,11 @@
                 }
               </p>
             </ion-label>
-            <ion-badge slot="end" [color]="note.type === 'checklist' ? 'tertiary' : 'medium'">
-              {{ (note.type === 'checklist' ? 'notes.badgeChecklist' : 'notes.badgeText') | translate }}
-            </ion-badge>
+            @if (isChecklistCompleted(note)) {
+              <ion-badge slot="end" color="medium" data-testid="note-completed-badge">
+                {{ 'notes.badgeCompleted' | translate }}
+              </ion-badge>
+            }
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option color="danger" (click)="deleteNote(note)" data-testid="note-delete">

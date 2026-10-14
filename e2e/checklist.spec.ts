@@ -24,10 +24,36 @@ test.describe('Checklist notes', () => {
     await expect(page.locator('ion-reorder')).toHaveCount(2);
 
     await page.locator('[data-testid^="checklist-check-"]').first().click();
-    await page.getByTestId('save-note').click();
-    await expect(page.getByText('Note created')).toBeVisible();
+    await expect(page.getByTestId('delete-note')).toBeVisible();
 
+    await page.locator('ion-back-button').click();
     await expect(page.getByTestId('notes-list').getByRole('heading', { name: 'À faire' })).toBeVisible();
-    await expect(page.getByTestId('notes-list').getByText('List', { exact: true })).toBeVisible();
+    await expect(page.getByTestId('note-completed-badge')).toHaveCount(0);
+  });
+
+  test('marks a checklist as done when every item is checked', async ({ page }) => {
+    await page.getByTestId('create-note-fab').click();
+    await page.getByRole('button', { name: 'Checklist' }).click();
+
+    await page.getByTestId('note-title-input').locator('input').fill('Courses');
+    const firstInput = page.locator('[data-testid^="checklist-text-"]').first().locator('input');
+    await firstInput.fill('Pain');
+    await firstInput.press('Enter');
+
+    const secondInput = page.locator('[data-testid^="checklist-text-"]').nth(1).locator('input');
+    await expect(secondInput).toBeFocused();
+    await secondInput.fill('Lait');
+
+    await page.locator('[data-testid^="checklist-check-"]').nth(0).click();
+    await page.locator('[data-testid^="checklist-check-"]').nth(1).click();
+    await expect(page.getByTestId('delete-note')).toBeVisible();
+
+    await page.locator('ion-back-button').click();
+    const noteItem = page.getByTestId('notes-list').locator('.note-completed').first();
+    await expect(noteItem).toBeVisible();
+    await expect(page.getByTestId('note-completed-badge')).toHaveText('Done');
+    await expect(page.getByTestId('notes-list').getByRole('heading', { name: 'Courses' })).toHaveClass(
+      /note-completed-text/
+    );
   });
 });
