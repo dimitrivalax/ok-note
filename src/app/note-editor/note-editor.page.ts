@@ -173,7 +173,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
    * Flushes a pending auto-save when leaving the editor.
    */
   ionViewWillLeave(): void {
-    void this.flushAutoSave();
+    void this.flushPendingAutoSave();
   }
 
   /**
@@ -184,6 +184,23 @@ export class NoteEditorPage implements OnInit, OnDestroy {
       clearTimeout(this.saveTimer);
       this.saveTimer = null;
     }
+  }
+
+  /**
+   * Persists pending edits before the router navigates away.
+   *
+   * @returns Always true so navigation can continue after the flush
+   */
+  async flushPendingAutoSave(): Promise<boolean> {
+    if (this.saveTimer) {
+      clearTimeout(this.saveTimer);
+      this.saveTimer = null;
+    }
+
+    await this.waitForSaveIdle();
+    await this.autoSave();
+    await this.waitForSaveIdle();
+    return true;
   }
 
   /**
@@ -361,11 +378,9 @@ export class NoteEditorPage implements OnInit, OnDestroy {
     }, this.autoSaveDelayMs);
   }
 
-  private async flushAutoSave(): Promise<void> {
-    if (this.saveTimer) {
-      clearTimeout(this.saveTimer);
-      this.saveTimer = null;
-      await this.autoSave();
+  private async waitForSaveIdle(): Promise<void> {
+    while (this.isSaving) {
+      await new Promise((resolve) => setTimeout(resolve, 25));
     }
   }
 

@@ -52,8 +52,6 @@ test.describe('Checklist notes', () => {
     const noteItem = page.getByTestId('notes-list').locator('.note-completed').first();
     await expect(noteItem).toBeVisible();
     await expect(page.getByTestId('note-completed-badge')).toHaveText('Done');
-    await expect(page.getByTestId('notes-list').getByRole('heading', { name: 'Courses' })).toHaveClass(
-      /note-completed-text/
-    );
+    await expect(noteItem.locator('.note-completed-text')).toHaveText('Pain · Lait');
   });
 });
