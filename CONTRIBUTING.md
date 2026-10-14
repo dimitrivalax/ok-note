@@ -19,6 +19,7 @@ Use **npm** as the supported package manager (`package-lock.json`).
 - Use [Conventional Commits](https://www.conventionalcommits.org/) for commit messages (for example `feat:`, `fix:`, `docs:`).
 - Describe the motivation and how you verified the change.
 - Update or add docs/ADRs when you change an architectural decision.
+- GitHub Actions runs `quality` (lint), `build`, `test`, and `e2e` on pull requests to `main` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
 ## Project conventions
 
