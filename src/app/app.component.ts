@@ -20,6 +20,7 @@ import { settingsOutline } from 'ionicons/icons';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { I18nService } from './services/i18n.service';
 import { NotificationService } from './services/notification.service';
+import { SplashScreenService } from './services/splash-screen.service';
 import { ThemeService } from './services/theme.service';
 
 /**
@@ -49,16 +50,18 @@ export class AppComponent implements OnInit {
   private readonly themeService = inject(ThemeService);
   private readonly i18nService = inject(I18nService);
   private readonly notificationService = inject(NotificationService);
+  private readonly splashScreenService = inject(SplashScreenService);
 
   constructor() {
     addIcons({ settingsOutline });
   }
 
   /**
-   * Initializes theme, locale, and notification tap handling.
+   * Initializes theme, locale, and notification tap handling, then hides the splash.
    */
   async ngOnInit(): Promise<void> {
     await Promise.all([this.themeService.init(), this.i18nService.init()]);
     await this.notificationService.initTapListener();
+    await this.splashScreenService.hide();
   }
 }

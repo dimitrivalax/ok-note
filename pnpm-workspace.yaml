@@ -3,5 +3,6 @@ allowBuilds:
   esbuild: true
   lmdb: true
   msgpackr-extract: true
+  sharp: true
 minimumReleaseAgeExclude:
   - zod@4.6.7

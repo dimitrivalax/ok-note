@@ -1,7 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 
 import { STORAGE_KEYS, type ThemePreference } from '../constants/storage-keys';
+import { SystemUiService } from './system-ui.service';
 
 /**
  * Manages light and dark theme preference for the app.
@@ -10,6 +11,8 @@ import { STORAGE_KEYS, type ThemePreference } from '../constants/storage-keys';
   providedIn: 'root',
 })
 export class ThemeService {
+  private readonly systemUiService = inject(SystemUiService);
+
   /**
    * Current theme preference as a reactive signal.
    */
@@ -21,7 +24,7 @@ export class ThemeService {
   async init(): Promise<void> {
     const { value } = await Preferences.get({ key: STORAGE_KEYS.THEME });
     const theme: ThemePreference = value === 'dark' ? 'dark' : 'light';
-    this.applyTheme(theme);
+    await this.applyTheme(theme);
   }
 
   /**
@@ -36,7 +39,7 @@ export class ThemeService {
    * Sets and persists the theme preference.
    */
   async setTheme(theme: ThemePreference): Promise<void> {
-    this.applyTheme(theme);
+    await this.applyTheme(theme);
     await Preferences.set({ key: STORAGE_KEYS.THEME, value: theme });
   }
 
@@ -47,8 +50,9 @@ export class ThemeService {
     return this.theme() === 'dark';
   }
 
-  private applyTheme(theme: ThemePreference): void {
+  private async applyTheme(theme: ThemePreference): Promise<void> {
     this.theme.set(theme);
     document.documentElement.classList.toggle('ion-palette-dark', theme === 'dark');
+    await this.systemUiService.apply(theme);
   }
 }
