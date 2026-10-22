@@ -76,7 +76,7 @@
       </ion-button>
     }
 
-    <ion-item>
+    <ion-item button detail="false" data-testid="reminder-picker" (click)="openReminderPicker()">
       <ion-label>
         <h3>{{ 'editor.reminder' | translate }}</h3>
         @if (reminderAt()) {
@@ -85,7 +85,7 @@
           <p data-testid="reminder-value">{{ 'editor.reminderNone' | translate }}</p>
         }
       </ion-label>
-      <ion-datetime-button datetime="reminder-datetime" data-testid="reminder-picker"></ion-datetime-button>
+      <ion-icon slot="end" name="calendar-outline" aria-hidden="true"></ion-icon>
     </ion-item>
 
     @if (reminderAt()) {
@@ -115,16 +115,3 @@
     }
   </ion-list>
 </ion-content>
-
-<ion-modal [keepContentsMounted]="true">
-  <ng-template>
-    <ion-datetime
-      id="reminder-datetime"
-      data-testid="reminder-datetime"
-      presentation="date-time"
-      [locale]="i18nService.angularLocale()"
-      [value]="reminderAt() || undefined"
-      (ionChange)="onReminderChange($any($event.detail).value)"
-    ></ion-datetime>
-  </ng-template>
-</ion-modal>

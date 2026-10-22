@@ -8,8 +8,6 @@ import {
   IonButtons,
   IonCheckbox,
   IonContent,
-  IonDatetime,
-  IonDatetimeButton,
   IonHeader,
   IonIcon,
   IonInput,
@@ -19,7 +17,6 @@ import {
   IonItemSliding,
   IonLabel,
   IonList,
-  IonModal,
   IonNote,
   IonReorder,
   IonReorderGroup,
@@ -29,12 +26,13 @@ import {
   type ItemReorderEventDetail,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { addOutline, trashOutline } from 'ionicons/icons';
+import { addOutline, calendarOutline, trashOutline } from 'ionicons/icons';
 import { ZodError } from 'zod';
 
 import type { ChecklistItem, Note, NoteType } from '../models/note.schema';
 import { TranslatePipe } from '../pipes/translate.pipe';
 import { AlertService } from '../services/alert.service';
+import { DatePickerService } from '../services/date-picker.service';
 import { I18nService } from '../services/i18n.service';
 import { NoteService } from '../services/note.service';
 
@@ -69,9 +67,6 @@ import { NoteService } from '../services/note.service';
     IonItemOptions,
     IonItemOption,
     IonIcon,
-    IonDatetimeButton,
-    IonModal,
-    IonDatetime,
   ],
 })
 export class NoteEditorPage implements OnInit, OnDestroy {
@@ -80,6 +75,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
   private readonly location = inject(Location);
   private readonly noteService = inject(NoteService);
   private readonly alertService = inject(AlertService);
+  private readonly datePickerService = inject(DatePickerService);
 
   /**
    * I18n service used by the template for locale-aware formatting.
@@ -133,7 +129,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
   private readonly autoSaveDelayMs = 500;
 
   constructor() {
-    addIcons({ addOutline, trashOutline });
+    addIcons({ addOutline, calendarOutline, trashOutline });
   }
 
   /**
@@ -220,10 +216,20 @@ export class NoteEditorPage implements OnInit, OnDestroy {
   }
 
   /**
-   * Updates the reminder and schedules an auto-save.
+   * Opens the native date-and-time picker for the reminder.
    */
-  onReminderChange(value: string | null | undefined): void {
-    this.reminderAt.set(value ?? '');
+  async openReminderPicker(): Promise<void> {
+    const value = await this.datePickerService.pickDateTime({
+      date: this.reminderAt() || null,
+      min: new Date().toISOString(),
+      title: this.i18nService.t('editor.reminder'),
+    });
+
+    if (!value) {
+      return;
+    }
+
+    this.reminderAt.set(value);
     this.scheduleAutoSave();
   }
 

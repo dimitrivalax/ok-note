@@ -211,6 +211,9 @@ importers:
       '@capacitor/status-bar':
         specifier: 8.0.4
         version: 8.0.4(@capacitor/core@8.5.3)
+      '@capgo/capacitor-date-picker':
+        specifier: ^8.1.14
+        version: 8.1.14(@capacitor/core@8.5.3)
       '@ionic/angular':
         specifier: ^9.0.0
         version: 9.0.7(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(@angular/forms@22.1.7(@angular/common@22.1.7(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(@angular/platform-browser@22.1.7(@angular/common@22.1.7(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2)))(rxjs@7.8.2))(@angular/router@22.1.7(@angular/common@22.1.7(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(@angular/platform-browser@22.1.7(@angular/common@22.1.7(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.1.7(@angular/compiler@22.1.7)(rxjs@7.8.2)))(rxjs@7.8.2))(rxjs@7.8.2)
@@ -631,6 +634,11 @@ packages:
 
   '@capacitor/status-bar@8.0.4':
     resolution: {integrity: sha512-ZMzBUyHBzwDUxcHadEhvOvmoPmMQGMZgaMRJu8ohELeI6IaxoVH9ZhdF/OHnY3/yykv3Glev8Tnbh4aZY/0B0w==}
+    peerDependencies:
+      '@capacitor/core': '>=8.0.0'
+
+  '@capgo/capacitor-date-picker@8.1.14':
+    resolution: {integrity: sha512-JuFJp7kQw4i8ho/ah0zIdK7rQFt57+UWfhI0va/i8HW+kDRmDGkGI+JHL/4rIKMnQkHIJ0FhoKBp9qf++wXYJA==}
     peerDependencies:
       '@capacitor/core': '>=8.0.0'
 
@@ -4662,6 +4670,10 @@ snapshots:
       '@capacitor/core': 8.5.3
 
   '@capacitor/status-bar@8.0.4(@capacitor/core@8.5.3)':
+    dependencies:
+      '@capacitor/core': 8.5.3
+
+  '@capgo/capacitor-date-picker@8.1.14(@capacitor/core@8.5.3)':
     dependencies:
       '@capacitor/core': 8.5.3
 
