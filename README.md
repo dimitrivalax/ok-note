@@ -1,6 +1,6 @@
 # Ok! Note
 
-Local-first notes and checklists for web and Android. Create text notes or checklists, search them, set reminders, and switch language (EN/FR) or theme (light/dark)—all data stays on the device.
+Local-first notes and checklists for mobile. Create text notes or checklists, search them, set reminders, and switch language (EN/FR) or theme (light/dark)—all data stays on the device.
 
 ## Features
 
@@ -36,14 +36,14 @@ Open the URL printed by the Angular CLI (typically `http://localhost:4200`).
 
 ### Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm start` | Serve the app locally |
-| `pnpm run build` | Production build to `www/` |
-| `pnpm test` | Unit tests |
-| `pnpm run lint` | ESLint |
-| `pnpm run e2e` | Playwright end-to-end tests |
-| `pnpm run e2e:ui` | Playwright UI mode |
+| Command           | Description                 |
+| ----------------- | --------------------------- |
+| `pnpm start`      | Serve the app locally       |
+| `pnpm run build`  | Production build to `www/`  |
+| `pnpm test`       | Unit tests                  |
+| `pnpm run lint`   | ESLint                      |
+| `pnpm run e2e`    | Playwright end-to-end tests |
+| `pnpm run e2e:ui` | Playwright UI mode          |
 
 ### Android
 
