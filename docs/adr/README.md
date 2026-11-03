@@ -11,6 +11,7 @@ ADRs capture significant technical decisions for Ok! Note.
 | [0003](0003-custom-i18n.md) | Custom lightweight i18n | Accepted |
 | [0004](0004-capacitor-plugin-services.md) | Capacitor plugins via services; web-safe stubs | Accepted |
 | [0005](0005-playwright-e2e.md) | Playwright e2e as primary QA; Vitest for unit tests | Accepted |
+| [0006](0006-note-backup-json.md) | JSON backup for note import and export | Accepted |
 
 ## Adding an ADR
 

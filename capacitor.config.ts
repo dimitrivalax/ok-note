@@ -1,5 +1,7 @@
 /// <reference types="@capacitor/splash-screen" />
 /// <reference types="@capacitor/status-bar" />
+/// <reference types="@capacitor/filesystem" />
+/// <reference types="@capacitor/share" />
 
 import type { CapacitorConfig } from '@capacitor/cli';
 

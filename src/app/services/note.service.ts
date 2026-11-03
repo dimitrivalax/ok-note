@@ -126,6 +126,37 @@ export class NoteService {
     await noteDb.notes.delete(id);
   }
 
+  /**
+   * Replaces every stored note with the provided set.
+   * Existing reminders are cancelled first; imported future reminders are rescheduled.
+   *
+   * @param notes - Notes to persist. Original ids and timestamps are kept.
+   */
+  async replaceAll(notes: Note[]): Promise<void> {
+    const existing = await this.getAll();
+    const prepared: Note[] = [];
+    for (const note of notes) {
+      const candidate = noteSchema.parse({
+        ...note,
+        notificationId: null,
+      });
+      prepared.push(await this.syncReminder(candidate));
+    }
+
+    for (const note of existing) {
+      if (note.notificationId != null) {
+        await this.notificationService.cancel(note.notificationId);
+      }
+    }
+
+    await noteDb.transaction('rw', noteDb.notes, async () => {
+      await noteDb.notes.clear();
+      if (prepared.length > 0) {
+        await noteDb.notes.bulkPut(prepared);
+      }
+    });
+  }
+
   private normalizeItems(
     items: Note['items']
   ): Note['items'] {

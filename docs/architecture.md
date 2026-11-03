@@ -10,6 +10,7 @@ flowchart LR
   Services --> DexieDB
   Services --> Preferences
   Services --> LocalNotifications
+  Services --> FileTransfer
   I18nService --> JsonCatalogs
 ```
 
@@ -23,8 +24,10 @@ flowchart LR
 
 | Service | Responsibility |
 |---------|----------------|
-| `NoteService` | CRUD, search, Zod validation, reminder sync |
+| `NoteService` | CRUD, search, Zod validation, reminder sync, replace-all restore |
 | `NoteDatabase` / `noteDb` | Dexie IndexedDB (`ok-note` database) |
+| `NoteBackupService` | Versioned JSON export/import of all notes |
+| `FileTransferService` | Web download and native Filesystem + Share |
 | `ThemeService` | Light/dark palette via Capacitor Preferences |
 | `I18nService` | Locale catalogs and `document.documentElement.lang` |
 | `NotificationService` | Local notifications on native; web-safe stubs |
@@ -35,6 +38,7 @@ Native Capacitor APIs are used only inside services so pages stay platform-agnos
 ## Data
 
 - **Notes**: IndexedDB via Dexie (`src/app/services/note-db.ts`). Schema and types live in Zod (`src/app/models/note.schema.ts`).
+- **Backup**: JSON envelope (`src/app/models/note-backup.schema.ts`) exported and restored from Settings. Import replaces every note after confirmation.
 - **Preferences**: Capacitor Preferences with keys from `src/app/constants/storage-keys.ts` (`ok-note.theme`, `ok-note.locale`).
 
 ## i18n and theme

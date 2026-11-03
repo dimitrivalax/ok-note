@@ -43,4 +43,31 @@
       </ion-segment>
     </ion-item>
   </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>{{ 'settings.backup' | translate }}</ion-label>
+    </ion-list-header>
+    <ion-item button detail="false" data-testid="settings-export-notes" (click)="onExport()">
+      <ion-label>
+        <h2>{{ 'settings.exportNotes' | translate }}</h2>
+        <p>{{ 'settings.exportNotesHint' | translate }}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button detail="false" data-testid="settings-import-notes" (click)="onImport()">
+      <ion-label>
+        <h2>{{ 'settings.importNotes' | translate }}</h2>
+        <p>{{ 'settings.importNotesHint' | translate }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <input
+    #importFileInput
+    class="backup-file-input"
+    type="file"
+    accept="application/json,.json"
+    data-testid="settings-import-file"
+    (change)="onImportFileSelected($event)"
+  />
 </ion-content>
