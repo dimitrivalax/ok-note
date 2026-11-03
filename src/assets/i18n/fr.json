@@ -55,6 +55,7 @@
   "settings.backup": "Sauvegarde",
   "settings.exportNotes": "Exporter les notes",
   "settings.exportNotesHint": "Télécharger une sauvegarde JSON de toutes les notes",
+  "settings.exportNotesHintNative": "Partager ou enregistrer une sauvegarde JSON de toutes les notes",
   "settings.importNotes": "Importer les notes",
   "settings.importNotesHint": "Remplacer toutes les notes par un fichier de sauvegarde",
   "settings.importConfirmHeader": "Remplacer toutes les notes ?",

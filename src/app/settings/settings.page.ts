@@ -1,4 +1,5 @@
 import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import {
   IonBackButton,
   IonButtons,
@@ -47,6 +48,11 @@ import { ThemeService } from '../services/theme.service';
   ],
 })
 export class SettingsPage {
+  /**
+   * Whether the app is currently running on a native platform (iOS or Android).
+   */
+  readonly isNative = Capacitor.isNativePlatform();
+
   /**
    * Theme service used by the template.
    */

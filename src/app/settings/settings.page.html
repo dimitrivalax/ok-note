@@ -51,7 +51,7 @@
     <ion-item button detail="false" data-testid="settings-export-notes" (click)="onExport()">
       <ion-label>
         <h2>{{ 'settings.exportNotes' | translate }}</h2>
-        <p>{{ 'settings.exportNotesHint' | translate }}</p>
+        <p>{{ (isNative ? 'settings.exportNotesHintNative' : 'settings.exportNotesHint') | translate }}</p>
       </ion-label>
     </ion-item>
     <ion-item button detail="false" data-testid="settings-import-notes" (click)="onImport()">
