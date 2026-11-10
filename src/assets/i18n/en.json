@@ -33,6 +33,8 @@
   "editor.createdAt": "Created",
   "editor.updatedAt": "Updated",
   "editor.delete": "Delete",
+  "editor.deleteReminderConfirmHeader": "Delete reminder",
+  "editor.deleteReminderConfirmMessage": "This action cannot be undone.",
   "editor.createdToast": "Note created",
   "editor.savedToast": "Note saved",
   "editor.contentRequiredHeader": "Content required",

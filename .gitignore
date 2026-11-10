@@ -75,5 +75,9 @@ Thumbs.db
 /blob-report/
 /playwright/.cache/
 
-# Android
+# Android & Credentials
 /android
+/credentials
+*.jks
+*.keystore
+key.properties

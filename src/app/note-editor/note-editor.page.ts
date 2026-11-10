@@ -156,7 +156,10 @@ export class NoteEditorPage implements OnInit, OnDestroy {
     const note = await this.noteService.getById(id);
     if (!note) {
       this.isHydrating = false;
-      await this.alertService.toast(this.i18nService.t('editor.notFoundToast'), 'danger');
+      await this.alertService.toast(
+        this.i18nService.t('editor.notFoundToast'),
+        'danger',
+      );
       await this.router.navigate(['/notes']);
       return;
     }
@@ -236,7 +239,16 @@ export class NoteEditorPage implements OnInit, OnDestroy {
   /**
    * Clears the reminder datetime.
    */
-  clearReminder(): void {
+  async clearReminder(): Promise<void> {
+    const confirmed = await this.alertService.confirm({
+      header: this.i18nService.t('editor.deleteReminderConfirmHeader'),
+      message: this.i18nService.t('editor.deleteReminderConfirmMessage'),
+      confirmText: this.i18nService.t('editor.deleteConfirmAction'),
+    });
+
+    if (!confirmed) {
+      return;
+    }
     this.reminderAt.set('');
     this.scheduleAutoSave();
   }
@@ -272,7 +284,9 @@ export class NoteEditorPage implements OnInit, OnDestroy {
    */
   removeItem(itemId: string): void {
     this.items.update((current) =>
-      current.filter((item) => item.id !== itemId).map((item, index) => ({ ...item, order: index }))
+      current
+        .filter((item) => item.id !== itemId)
+        .map((item, index) => ({ ...item, order: index })),
     );
     this.scheduleAutoSave();
   }
@@ -282,7 +296,9 @@ export class NoteEditorPage implements OnInit, OnDestroy {
    */
   updateItemText(itemId: string, value: string | null | undefined): void {
     this.items.update((current) =>
-      current.map((item) => (item.id === itemId ? { ...item, text: value ?? '' } : item))
+      current.map((item) =>
+        item.id === itemId ? { ...item, text: value ?? '' } : item,
+      ),
     );
     this.scheduleAutoSave();
   }
@@ -292,7 +308,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
    */
   toggleItemChecked(itemId: string, checked: boolean): void {
     this.items.update((current) =>
-      current.map((item) => (item.id === itemId ? { ...item, checked } : item))
+      current.map((item) => (item.id === itemId ? { ...item, checked } : item)),
     );
     this.scheduleAutoSave();
   }
@@ -336,7 +352,10 @@ export class NoteEditorPage implements OnInit, OnDestroy {
 
     await this.noteService.delete(this.noteId);
     this.noteId = null;
-    await this.alertService.toast(this.i18nService.t('editor.deletedToast'), 'success');
+    await this.alertService.toast(
+      this.i18nService.t('editor.deletedToast'),
+      'success',
+    );
     await this.router.navigate(['/notes']);
   }
 
@@ -363,7 +382,7 @@ export class NoteEditorPage implements OnInit, OnDestroy {
   private focusChecklistItem(itemId: string): void {
     setTimeout(() => {
       const input = document.querySelector(
-        `[data-testid="checklist-text-${itemId}"]`
+        `[data-testid="checklist-text-${itemId}"]`,
       ) as HTMLIonInputElement | null;
       void input?.setFocus();
     }, 50);
@@ -404,7 +423,9 @@ export class NoteEditorPage implements OnInit, OnDestroy {
       type: this.noteType(),
       content: this.content(),
       items: this.items(),
-      reminderAt: this.reminderAt() ? new Date(this.reminderAt()).toISOString() : null,
+      reminderAt: this.reminderAt()
+        ? new Date(this.reminderAt()).toISOString()
+        : null,
     };
   }
 
@@ -443,7 +464,10 @@ export class NoteEditorPage implements OnInit, OnDestroy {
         return;
       }
 
-      await this.alertService.toast(this.i18nService.t('editor.saveFailedToast'), 'danger');
+      await this.alertService.toast(
+        this.i18nService.t('editor.saveFailedToast'),
+        'danger',
+      );
     } finally {
       this.isSaving = false;
     }

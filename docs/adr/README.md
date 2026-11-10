@@ -12,6 +12,8 @@ ADRs capture significant technical decisions for Ok! Note.
 | [0004](0004-capacitor-plugin-services.md) | Capacitor plugins via services; web-safe stubs | Accepted |
 | [0005](0005-playwright-e2e.md) | Playwright e2e as primary QA; Vitest for unit tests | Accepted |
 | [0006](0006-note-backup-json.md) | JSON backup for note import and export | Accepted |
+| [0007](0007-android-release-signing.md) | Android release signing and upload key management | Accepted |
+| [0008](0008-google-play-store-listing.md) | Google Play Store listing and metadata | Accepted |
 
 ## Adding an ADR
 

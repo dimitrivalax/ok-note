@@ -33,6 +33,8 @@
   "editor.createdAt": "Créée le",
   "editor.updatedAt": "Modifiée le",
   "editor.delete": "Supprimer",
+  "editor.deleteReminderConfirmHeader": "Supprimer le rappel",
+  "editor.deleteReminderConfirmMessage": "Cette action est définitive.",
   "editor.createdToast": "Note créée",
   "editor.savedToast": "Note enregistrée",
   "editor.contentRequiredHeader": "Contenu requis",
