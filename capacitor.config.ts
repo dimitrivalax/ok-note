@@ -2,6 +2,7 @@
 /// <reference types="@capacitor/status-bar" />
 /// <reference types="@capacitor/filesystem" />
 /// <reference types="@capacitor/share" />
+/// <reference types="@capacitor/local-notifications" />
 
 import type { CapacitorConfig } from '@capacitor/cli';
 
@@ -10,6 +11,10 @@ const config: CapacitorConfig = {
   appName: 'Ok! Note',
   webDir: 'www',
   plugins: {
+    LocalNotifications: {
+      smallIcon: 'ic_stat_notification',
+      iconColor: '#39afea',
+    },
     SplashScreen: {
       launchShowDuration: 2000,
       launchAutoHide: false,

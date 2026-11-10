@@ -83,6 +83,8 @@ export class NotificationService {
       body: options.body,
       schedule: { at: options.at, allowWhileIdle: true },
       extra: { noteId: options.noteId },
+      smallIcon: 'ic_stat_notification',
+      iconColor: '#39afea',
       sound: undefined,
     };
 
