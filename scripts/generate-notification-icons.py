@@ -11,7 +11,8 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE_ASSET = ROOT / "assets" / "icon-only.png"
+SOURCE_ASSET = ROOT / "assets" / "icon-foreground.png"
+SPLASH_ICON_ASSET = ROOT / "assets" / "splash-icon.png"
 RES_DIR = ROOT / "android" / "app" / "src" / "main" / "res"
 
 DENSITIES = {
@@ -21,6 +22,14 @@ DENSITIES = {
     "drawable-xxhdpi": 72,
     "drawable-xxxhdpi": 96,
     "drawable": 96,
+}
+
+SPLASH_ICON_DENSITIES = {
+    "drawable-mdpi": 240,
+    "drawable-hdpi": 360,
+    "drawable-xhdpi": 480,
+    "drawable-xxhdpi": 720,
+    "drawable-xxxhdpi": 960,
 }
 
 
@@ -75,6 +84,17 @@ def main():
         icon = build_notification_icon(alpha, size)
         icon.save(out_file, format="PNG")
         print(f"Generated {out_file.relative_to(ROOT)} ({size}x{size})")
+
+    # Generate density-specific Android 12+ splash_icon drawables if splash-icon.png exists
+    if SPLASH_ICON_ASSET.exists():
+        splash_im = Image.open(SPLASH_ICON_ASSET).convert("RGBA")
+        for folder, size in SPLASH_ICON_DENSITIES.items():
+            out_dir = RES_DIR / folder
+            out_dir.mkdir(parents=True, exist_ok=True)
+            out_file = out_dir / "splash_icon.png"
+            scaled = splash_im.resize((size, size), Image.Resampling.LANCZOS)
+            scaled.save(out_file, format="PNG")
+            print(f"Generated {out_file.relative_to(ROOT)} ({size}x{size})")
 
 
 if __name__ == "__main__":

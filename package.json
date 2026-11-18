@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui",
-    "assets:generate": "capacitor-assets generate --android --splashBackgroundColor '#f6f8fc' --splashBackgroundColorDark '#2f2f2f' --iconBackgroundColor '#ffffff' --iconBackgroundColorDark '#ffffff' && python3 scripts/generate-notification-icons.py",
+    "assets:generate": "capacitor-assets generate --android --splashBackgroundColor '#f6f8fc' --splashBackgroundColorDark '#2f2f2f' --iconBackgroundColor '#15a6ef' --iconBackgroundColorDark '#15a6ef' && python3 scripts/generate-notification-icons.py",
     "assets:notification": "python3 scripts/generate-notification-icons.py"
   },
   "private": true,
